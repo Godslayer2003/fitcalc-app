@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${siteConfig.name} — Free Health & Fitness Calculators`,
+    name: `${siteConfig.name} — Health & Fitness Calculators`,
     short_name: siteConfig.name,
     description: siteConfig.description,
     start_url: "/",

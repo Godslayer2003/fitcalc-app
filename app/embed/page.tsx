@@ -6,7 +6,7 @@ import EmbedSnippet from "./EmbedSnippet";
 
 export const metadata: Metadata = {
   title: "Embed a calculator on your site",
-  description: `Free health & fitness calculator widgets from ${siteConfig.name}, embeddable on any website.`,
+  description: `Health & fitness calculator widgets from ${siteConfig.name}, embeddable on any website.`,
 };
 
 export default function EmbedPage() {
@@ -19,8 +19,8 @@ export default function EmbedPage() {
         Embed a calculator on your site
       </h1>
       <p className="mt-3 max-w-2xl text-zinc-500 dark:text-zinc-400">
-        Every calculator on {siteConfig.name} is available as a free,
-        no-signup embed — just copy the snippet below into your page. Each
+        Every calculator on {siteConfig.name} is available as an
+        embed — just copy the snippet below into your page. Each
         widget includes a small &quot;Powered by {siteConfig.name}&quot;
         credit link.
       </p>

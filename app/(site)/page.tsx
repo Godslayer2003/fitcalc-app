@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
 const trustPoints = [
   { Icon: Zap, label: "Instant results" },
   { Icon: Lock, label: "Nothing leaves your device" },
-  { Icon: CheckCircle2, label: "No sign-up to calculate" },
+  { Icon: CheckCircle2, label: "Save your results" },
 ];
 
 export default function Home() {
@@ -24,16 +24,16 @@ export default function Home() {
           <div className="relative text-center lg:text-left">
             <span className="animate-fade-up relative inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
               <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-accent" />
-              8 free calculators &middot; track your progress
+              8 fitness calculators &middot; track your progress
             </span>
             <h1 className="animate-fade-up relative mt-5 text-4xl font-bold tracking-tight [animation-delay:80ms] sm:text-5xl md:text-6xl">
-              Free fitness calculators,
+              Fitness calculators,
               <br />
               <span className="text-accent">no guesswork</span>
             </h1>
             <p className="animate-fade-up relative mx-auto mt-5 max-w-xl text-lg text-zinc-500 [animation-delay:160ms] lg:mx-0">
               BMI, calories, macros, and more — using standard, published
-              formulas. Create a free account to save your results and watch
+              formulas. Create an account to save your results and watch
               your progress over time.
             </p>
             <div className="animate-fade-up relative mt-7 flex flex-wrap justify-center gap-3 [animation-delay:240ms] lg:justify-start">

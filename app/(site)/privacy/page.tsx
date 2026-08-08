@@ -35,7 +35,7 @@ export default function PrivacyPage() {
           </h2>
           <p>
             We may use privacy-respecting analytics and third-party
-            advertising (such as Google AdSense) to keep {siteConfig.name} free.
+            advertising (such as Google AdSense) to support {siteConfig.name}.
             These services may use cookies or similar technologies as
             described in their own privacy policies.
           </p>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
-import HideInApp from "@/components/HideInApp";
 
 export const metadata: Metadata = {
   title: "About",
@@ -19,23 +18,12 @@ export default function AboutPage() {
           standard, published formulas. Every calculator runs entirely
           on your device, so nothing you enter is ever uploaded anywhere.
         </p>
-        <HideInApp>
-          <p>
-            Every calculator is also available as a free embeddable widget —
-            see the{" "}
-            <a href="/embed" className="underline">
-              Embed
-            </a>{" "}
-            page if you&apos;d like to add one to your own site.
-          </p>
-        </HideInApp>
         <p>
-          Create a free account to save your BMI and body fat results over
-          time and watch your progress on a simple chart — no account is
-          needed to use any calculator.
+          Create an account to save your BMI and body fat results over
+          time and watch your progress on a simple chart.
         </p>
         <p>
-          {siteConfig.name} is free to use, supported by unobtrusive ads. Questions,
+          {siteConfig.name} is supported by unobtrusive ads. Questions,
           bug reports, or ideas for a new calculator? Email{" "}
           <a href="mailto:ethan10038@gmail.com" className="underline">
             ethan10038@gmail.com

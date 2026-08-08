@@ -34,7 +34,7 @@ export default function TermsPage() {
             Using the calculators
           </h2>
           <p>
-            {siteConfig.name} is provided &quot;as is&quot;, free to use,
+            {siteConfig.name} is provided &quot;as is&quot;,
             with no guarantee of uptime or accuracy. Formula-based estimates
             can differ from clinical measurements — don&apos;t rely on them
             for anything where that difference could cause harm.

@@ -33,7 +33,7 @@ export default function Image() {
             textAlign: "center",
           }}
         >
-          Free health & fitness calculators
+          Health & fitness calculators
         </div>
       </div>
     ),

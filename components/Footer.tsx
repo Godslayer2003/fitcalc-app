@@ -17,7 +17,7 @@ export default function Footer() {
               {siteConfig.name}
             </Link>
             <p className="mt-3 max-w-[22ch] text-sm text-zinc-500 dark:text-zinc-400">
-              Standard formulas. No sign-up required.
+              Standard, published formulas.
             </p>
           </div>
 

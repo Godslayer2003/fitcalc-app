@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
+import HideInApp from "@/components/HideInApp";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -34,23 +35,25 @@ export default function PrivacyPage() {
           </h2>
           <p>
             We may use privacy-respecting analytics and third-party
-            advertising (such as Google AdSense) to keep this site free.
+            advertising (such as Google AdSense) to keep {siteConfig.name} free.
             These services may use cookies or similar technologies as
             described in their own privacy policies.
           </p>
         </section>
 
-        <section>
-          <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Embedded widgets
-          </h2>
-          <p>
-            If you embed one of our calculators on your own site via
-            iframe, the same applies there — values entered by your
-            visitors stay in their browser and aren&apos;t sent to us or
-            to you.
-          </p>
-        </section>
+        <HideInApp>
+          <section>
+            <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
+              Embedded widgets
+            </h2>
+            <p>
+              If you embed one of our calculators on your own site via
+              iframe, the same applies there — values entered by your
+              visitors stay in their browser and aren&apos;t sent to us or
+              to you.
+            </p>
+          </section>
+        </HideInApp>
 
         <section>
           <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">

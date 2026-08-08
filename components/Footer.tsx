@@ -16,6 +16,9 @@ export default function Footer() {
               </span>
               {siteConfig.name}
             </Link>
+            <p className="mt-3 max-w-[22ch] text-sm text-zinc-500 dark:text-zinc-400">
+              Standard formulas. No sign-up required.
+            </p>
           </div>
 
           <div>
@@ -46,7 +49,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
-              Site
+              More
             </h3>
             <ul className="mt-3 flex flex-col gap-2 text-sm">
               <li>

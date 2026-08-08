@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
+import HideInApp from "@/components/HideInApp";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -40,20 +41,22 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <section>
-          <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Embedding our widgets
-          </h2>
-          <p>
-            You&apos;re welcome to embed any calculator on your own site
-            using the snippets on the{" "}
-            <a href="/embed" className="underline">
-              Embed
-            </a>{" "}
-            page, provided the &quot;Powered by {siteConfig.name}&quot;
-            credit link stays visible and unmodified.
-          </p>
-        </section>
+        <HideInApp>
+          <section>
+            <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
+              Embedding our widgets
+            </h2>
+            <p>
+              You&apos;re welcome to embed any calculator on your own site
+              using the snippets on the{" "}
+              <a href="/embed" className="underline">
+                Embed
+              </a>{" "}
+              page, provided the &quot;Powered by {siteConfig.name}&quot;
+              credit link stays visible and unmodified.
+            </p>
+          </section>
+        </HideInApp>
 
         <section>
           <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
@@ -75,7 +78,7 @@ export default function TermsPage() {
           </h2>
           <p>
             We may update these terms from time to time. Continued use of
-            the site after changes means you accept the new terms.
+            {" "}{siteConfig.name} after changes means you accept the new terms.
           </p>
         </section>
       </div>

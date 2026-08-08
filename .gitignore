@@ -42,3 +42,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Android app packaging (contains the Play Store signing keystore — never commit this)
+/android-twa/

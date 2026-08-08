@@ -16,9 +16,6 @@ export default function Footer() {
               </span>
               {siteConfig.name}
             </Link>
-            <p className="mt-3 max-w-[22ch] text-sm text-zinc-500 dark:text-zinc-400">
-              Free fitness calculators that run entirely on your device.
-            </p>
           </div>
 
           <div>

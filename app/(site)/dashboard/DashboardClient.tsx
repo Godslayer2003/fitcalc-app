@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useAuth, SignIn, useUser } from "@clerk/nextjs";
+import { Show, SignIn, useUser } from "@clerk/nextjs";
 import { CheckCircle2, ShieldOff, Loader2, Construction } from "lucide-react";
 import { REMOVE_ADS_PRICE_LABEL, CLERK_ENABLED } from "@/lib/billing";
 
@@ -22,34 +22,29 @@ export default function DashboardClient() {
 }
 
 /**
- * Isolated so its Clerk hooks only ever run when CLERK_ENABLED is true,
- * i.e. when a ClerkProvider is actually mounted above it in the tree.
+ * Isolated so <Show> only ever mounts when CLERK_ENABLED is true, i.e.
+ * when a ClerkProvider is actually mounted above it in the tree.
  */
 function DashboardAuthGate() {
-  const { isLoaded, isSignedIn } = useAuth();
-
-  if (!isLoaded) {
-    return <div className="mx-auto max-w-md px-4 py-14 sm:px-6" />;
-  }
-
-  if (!isSignedIn) {
-    return (
-      <div className="mx-auto max-w-md px-4 py-14 text-center sm:px-6">
-        <h1 className="text-2xl font-bold tracking-tight">Sign in to your account</h1>
-        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-          Manage your account, and go ad-free with a one-time payment.
-        </p>
-        <div className="mt-6 flex justify-center">
-          <SignIn routing="hash" />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="mx-auto max-w-md px-4 py-14 sm:px-6">
-      <DashboardContent />
-    </div>
+    <>
+      <Show when="signed-out">
+        <div className="mx-auto max-w-md px-4 py-14 text-center sm:px-6">
+          <h1 className="text-2xl font-bold tracking-tight">Sign in to your account</h1>
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+            Manage your account, and go ad-free with a one-time payment.
+          </p>
+          <div className="mt-6 flex justify-center">
+            <SignIn routing="hash" />
+          </div>
+        </div>
+      </Show>
+      <Show when="signed-in">
+        <div className="mx-auto max-w-md px-4 py-14 sm:px-6">
+          <DashboardContent />
+        </div>
+      </Show>
+    </>
   );
 }
 

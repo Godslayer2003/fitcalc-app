@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const html = (
+  return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
@@ -51,10 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="flex min-h-full flex-col bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
-        {children}
+        {CLERK_ENABLED ? <ClerkProvider>{children}</ClerkProvider> : children}
       </body>
     </html>
   );
-
-  return CLERK_ENABLED ? <ClerkProvider>{html}</ClerkProvider> : html;
 }

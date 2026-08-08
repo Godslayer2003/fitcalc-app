@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.fitcalc_app_omega.twa",
+      "sha256_cert_fingerprints": [
+        "70:01:6F:F3:68:E3:19:07:72:57:DE:29:8A:B9:16:5D:5A:7E:1B:A3:9D:9C:43:56:20:98:D1:5F:14:FC:8C:FB"
+      ]
+    }
+  }
+]

@@ -1,11 +1,10 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { Sparkles } from "lucide-react";
 import { CLERK_ENABLED } from "@/lib/billing";
 
 const PLACEHOLDER_CLASSES =
-  "flex min-h-24 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-accent/25 bg-gradient-to-br from-accent-soft to-transparent text-xs text-zinc-400 dark:border-accent/20 dark:text-zinc-500";
+  "flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-black/[0.06] bg-zinc-50/80 text-[11px] font-medium uppercase tracking-wide text-zinc-300 dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-zinc-600";
 
 /**
  * Placeholder ad slot. Once you have an AdSense (or other network) publisher
@@ -15,10 +14,7 @@ const PLACEHOLDER_CLASSES =
 export default function AdSlot({ className = "" }: { className?: string }) {
   if (!CLERK_ENABLED) {
     return (
-      <div className={`${PLACEHOLDER_CLASSES} ${className}`}>
-        <Sparkles className="h-3.5 w-3.5 text-accent/60" />
-        Ad space
-      </div>
+      <div className={`${PLACEHOLDER_CLASSES} ${className}`}>Advertisement</div>
     );
   }
   return <AdSlotWithAdsRemovedCheck className={className} />;
@@ -34,10 +30,5 @@ function AdSlotWithAdsRemovedCheck({ className }: { className: string }) {
 
   if (adsRemoved) return null;
 
-  return (
-    <div className={`${PLACEHOLDER_CLASSES} ${className}`}>
-      <Sparkles className="h-3.5 w-3.5 text-accent/60" />
-      Ad space
-    </div>
-  );
+  return <div className={`${PLACEHOLDER_CLASSES} ${className}`}>Advertisement</div>;
 }

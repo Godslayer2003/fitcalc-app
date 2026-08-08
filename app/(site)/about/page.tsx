@@ -29,10 +29,10 @@ export default function AboutPage() {
         <p>
           The site is free to use, supported by unobtrusive ads. Questions,
           bug reports, or ideas for a new calculator? Email{" "}
-          <a href="mailto:hello@example.com" className="underline">
-            hello@example.com
-          </a>{" "}
-          (update this to your real address before launch).
+          <a href="mailto:ethan10038@gmail.com" className="underline">
+            ethan10038@gmail.com
+          </a>
+          .
         </p>
       </div>
     </div>

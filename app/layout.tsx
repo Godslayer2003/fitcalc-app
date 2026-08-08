@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
+import { CLERK_ENABLED } from "@/lib/billing";
 
 const ADSENSE_CLIENT_ID = "ca-pub-2856226090534119";
 
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
+  const html = (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
@@ -53,4 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
+
+  return CLERK_ENABLED ? <ClerkProvider>{html}</ClerkProvider> : html;
 }

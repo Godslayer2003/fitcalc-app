@@ -54,6 +54,21 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
+            Accounts and payments (optional)
+          </h2>
+          <p>
+            Creating an account is entirely optional and only needed if you
+            want to remove ads. If you sign in, our authentication provider
+            (Clerk) stores your email address and basic account details.
+            If you pay to remove ads, our payment processor (Stripe) handles
+            your card details directly — we never see or store your full
+            card number. We only receive confirmation that a payment
+            succeeded, which we use to mark your account ad-free.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
             Contact
           </h2>
           <p>

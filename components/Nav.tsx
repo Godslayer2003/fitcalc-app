@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { Activity } from "lucide-react";
+import { Activity, LayoutDashboard } from "lucide-react";
+import { useAuth, SignInButton, UserButton } from "@clerk/nextjs";
 import { siteConfig } from "@/lib/site";
+import { CLERK_ENABLED } from "@/lib/billing";
 
 export default function Nav() {
   return (
@@ -22,8 +26,42 @@ export default function Nav() {
           <Link href="/about" className="text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300">
             About
           </Link>
+          {CLERK_ENABLED && <AuthSection />}
         </nav>
       </div>
     </header>
+  );
+}
+
+/**
+ * Isolated so its Clerk hook only ever runs when CLERK_ENABLED is true,
+ * i.e. when a ClerkProvider is actually mounted above it in the tree.
+ */
+function AuthSection() {
+  const { isLoaded, isSignedIn } = useAuth();
+
+  if (!isLoaded) return null;
+
+  if (!isSignedIn) {
+    return (
+      <SignInButton mode="modal">
+        <button className="rounded-full border border-black/15 px-3.5 py-1.5 text-xs font-semibold transition-colors hover:border-accent hover:text-accent dark:border-white/15">
+          Sign in
+        </button>
+      </SignInButton>
+    );
+  }
+
+  return (
+    <>
+      <Link
+        href="/dashboard"
+        className="flex items-center gap-1.5 text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300"
+      >
+        <LayoutDashboard className="h-4 w-4" />
+        Dashboard
+      </Link>
+      <UserButton />
+    </>
   );
 }

@@ -70,17 +70,29 @@ export default function MacroCalculator() {
       )}
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-accent/20 bg-accent-soft p-4">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Protein</div>
-          <div className="mt-1 text-xl font-bold text-accent">{Math.round(proteinG)}g</div>
+        <div className="rounded-2xl border border-accent/20 bg-accent-soft p-5">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Protein
+          </div>
+          <div className="mt-1 text-3xl font-bold tracking-tight text-accent">
+            {Math.round(proteinG)}g
+          </div>
         </div>
-        <div className="rounded-xl border border-accent/20 bg-accent-soft p-4">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Carbs</div>
-          <div className="mt-1 text-xl font-bold text-accent">{Math.round(carbG)}g</div>
+        <div className="rounded-2xl border border-accent/20 bg-accent-soft p-5">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Carbs
+          </div>
+          <div className="mt-1 text-3xl font-bold tracking-tight text-accent">
+            {Math.round(carbG)}g
+          </div>
         </div>
-        <div className="rounded-xl border border-accent/20 bg-accent-soft p-4">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Fat</div>
-          <div className="mt-1 text-xl font-bold text-accent">{Math.round(fatG)}g</div>
+        <div className="rounded-2xl border border-accent/20 bg-accent-soft p-5">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Fat
+          </div>
+          <div className="mt-1 text-3xl font-bold tracking-tight text-accent">
+            {Math.round(fatG)}g
+          </div>
         </div>
       </div>
     </div>

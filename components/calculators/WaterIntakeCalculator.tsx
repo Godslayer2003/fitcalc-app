@@ -69,17 +69,25 @@ export default function WaterIntakeCalculator() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border-2 border-accent bg-accent-soft p-5">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Liters</div>
-          <div className="mt-1 text-2xl font-bold text-accent">{totalL.toFixed(1)} L</div>
+        <div className="rounded-2xl border-2 border-accent bg-accent-soft p-5">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Liters
+          </div>
+          <div className="mt-1 text-3xl font-bold tracking-tight text-accent">
+            {totalL.toFixed(1)} L
+          </div>
         </div>
-        <div className="rounded-xl border border-black/10 p-5 dark:border-white/10">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Fluid ounces</div>
-          <div className="mt-1 text-2xl font-bold">{Math.round(totalOz)} oz</div>
+        <div className="rounded-2xl border border-black/10 p-5 dark:border-white/10">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Fluid ounces
+          </div>
+          <div className="mt-1 text-3xl font-bold tracking-tight">{Math.round(totalOz)} oz</div>
         </div>
-        <div className="rounded-xl border border-black/10 p-5 dark:border-white/10">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Cups</div>
-          <div className="mt-1 text-2xl font-bold">{totalCups.toFixed(1)}</div>
+        <div className="rounded-2xl border border-black/10 p-5 dark:border-white/10">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Cups
+          </div>
+          <div className="mt-1 text-3xl font-bold tracking-tight">{totalCups.toFixed(1)}</div>
         </div>
       </div>
     </div>

@@ -1,31 +1,29 @@
 import Link from "next/link";
-import { Scale, Apple, Dumbbell, HeartPulse, type LucideIcon } from "lucide-react";
 import type { Tool } from "@/lib/tools";
-
-const categoryIcons: Record<Tool["category"], LucideIcon> = {
-  "Body Composition": Scale,
-  Nutrition: Apple,
-  Training: Dumbbell,
-  Wellness: HeartPulse,
-};
+import { categoryIcons, categoryStyles } from "@/lib/categories";
 
 export default function ToolCard({ tool }: { tool: Tool }) {
   const Icon = categoryIcons[tool.category];
+  const style = categoryStyles[tool.category];
   return (
     <Link
       href={`/tools/${tool.slug}`}
-      className="group flex flex-col gap-2 rounded-xl border border-black/10 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md dark:border-white/10 dark:hover:border-accent/40"
+      className={`group flex flex-col gap-3 rounded-2xl border border-black/10 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:border-white/10 ${style.ring}`}
     >
-      <span className="flex w-fit items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-medium text-accent">
-        <Icon className="h-3 w-3" />
-        {tool.category}
-      </span>
-      <h3 className="text-base font-semibold group-hover:text-accent">
-        {tool.name}
-      </h3>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-        {tool.description}
-      </p>
+      <div
+        className={`flex h-11 w-11 items-center justify-center rounded-xl ${style.iconBg} text-white shadow-sm transition-transform group-hover:scale-105`}
+      >
+        <Icon className="h-5 w-5" strokeWidth={2.25} />
+      </div>
+      <div>
+        <span className={`text-xs font-semibold uppercase tracking-wide ${style.text}`}>
+          {tool.category}
+        </span>
+        <h3 className="mt-0.5 text-base font-semibold group-hover:text-accent">
+          {tool.name}
+        </h3>
+      </div>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{tool.description}</p>
     </Link>
   );
 }

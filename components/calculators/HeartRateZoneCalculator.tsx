@@ -54,14 +54,15 @@ export default function HeartRateZoneCalculator() {
         {ZONES.map((zone) => (
           <div
             key={zone.name}
-            className="flex items-center justify-between overflow-hidden rounded-lg border border-black/10 py-2.5 pr-4 text-sm dark:border-white/10"
+            className="flex items-center justify-between overflow-hidden rounded-xl border border-black/10 py-3 pr-4 text-sm dark:border-white/10"
           >
             <span className="flex items-center gap-3 font-medium">
-              <span className={`h-6 w-1.5 rounded-full ${zone.bar}`} />
+              <span className={`h-8 w-1.5 rounded-full ${zone.bar}`} />
               {zone.name}
             </span>
-            <span className="font-mono text-zinc-600 dark:text-zinc-300">
-              {targetAt(zone.low).toFixed(0)}–{targetAt(zone.high).toFixed(0)} bpm
+            <span className="font-mono text-lg font-semibold text-zinc-700 dark:text-zinc-200">
+              {targetAt(zone.low).toFixed(0)}–{targetAt(zone.high).toFixed(0)}
+              <span className="ml-1 text-xs font-normal text-zinc-400">bpm</span>
             </span>
           </div>
         ))}

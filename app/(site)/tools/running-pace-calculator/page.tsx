@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <ToolPageHeader name={tool.name} description={tool.description} />
+      <ToolPageHeader name={tool.name} description={tool.description} category={tool.category} />
       <RunningPaceCalculator />
       <Disclaimer />
       <div className="mt-10">

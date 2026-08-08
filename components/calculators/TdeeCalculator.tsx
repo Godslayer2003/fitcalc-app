@@ -76,39 +76,59 @@ export default function TdeeCalculator() {
       <div className="mt-4">
         <label className="mb-2 block text-sm font-medium">Activity level</label>
         <div className="flex flex-col gap-2">
-          {ACTIVITY_LEVELS.map((level) => (
-            <label
-              key={level.label}
-              className={`flex cursor-pointer items-center justify-between rounded-lg border px-4 py-2.5 text-sm ${
-                activity === level.value
-                  ? "border-zinc-900 dark:border-white"
-                  : "border-black/10 dark:border-white/10"
-              }`}
-            >
-              <span>
-                <span className="font-medium">{level.label}</span>{" "}
-                <span className="text-zinc-500">— {level.hint}</span>
-              </span>
-              <input
-                type="radio"
-                name="activity"
-                checked={activity === level.value}
-                onChange={() => setActivity(level.value)}
-                className="ml-3"
-              />
-            </label>
-          ))}
+          {ACTIVITY_LEVELS.map((level) => {
+            const selected = activity === level.value;
+            return (
+              <label
+                key={level.label}
+                className={`flex cursor-pointer items-center justify-between rounded-xl border px-4 py-3 text-sm transition-colors ${
+                  selected
+                    ? "border-accent bg-accent-soft"
+                    : "border-black/10 hover:border-black/20 dark:border-white/10 dark:hover:border-white/20"
+                }`}
+              >
+                <span>
+                  <span className={`font-semibold ${selected ? "text-accent" : ""}`}>{level.label}</span>{" "}
+                  <span className="text-zinc-500 dark:text-zinc-400">— {level.hint}</span>
+                </span>
+                <span
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                    selected ? "border-accent" : "border-black/20 dark:border-white/20"
+                  }`}
+                >
+                  {selected && <span className="h-2.5 w-2.5 rounded-full bg-accent" />}
+                </span>
+                <input
+                  type="radio"
+                  name="activity"
+                  checked={selected}
+                  onChange={() => setActivity(level.value)}
+                  className="sr-only"
+                />
+              </label>
+            );
+          })}
         </div>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <div className="rounded-xl border border-black/10 p-5 dark:border-white/10">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Base metabolic rate (BMR)</div>
-          <div className="mt-1 text-2xl font-bold">{Math.round(bmr).toLocaleString()} kcal</div>
+        <div className="rounded-2xl border border-black/10 p-6 dark:border-white/10">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Base metabolic rate
+          </div>
+          <div className="mt-1 text-4xl font-bold tracking-tight">
+            {Math.round(bmr).toLocaleString()}
+            <span className="ml-1 text-lg font-medium text-zinc-400">kcal</span>
+          </div>
         </div>
-        <div className="rounded-xl border-2 border-accent bg-accent-soft p-5">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Daily calories (TDEE)</div>
-          <div className="mt-1 text-2xl font-bold text-accent">{Math.round(tdee).toLocaleString()} kcal</div>
+        <div className="rounded-2xl border-2 border-accent bg-accent-soft p-6">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Daily calories (TDEE)
+          </div>
+          <div className="mt-1 text-4xl font-bold tracking-tight text-accent">
+            {Math.round(tdee).toLocaleString()}
+            <span className="ml-1 text-lg font-medium text-accent/60">kcal</span>
+          </div>
         </div>
       </div>
     </div>

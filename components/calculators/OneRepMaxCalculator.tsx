@@ -62,10 +62,13 @@ export default function OneRepMaxCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border-2 border-accent bg-accent-soft p-5">
-        <div className="text-xs text-zinc-500 dark:text-zinc-400">Estimated one-rep max</div>
-        <div className="mt-1 text-3xl font-bold text-accent">
-          {oneRepMax.toFixed(1)} {unit}
+      <div className="mt-6 rounded-2xl border-2 border-accent bg-accent-soft p-6">
+        <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          Estimated one-rep max
+        </div>
+        <div className="mt-1 text-6xl font-bold tracking-tight text-accent">
+          {oneRepMax.toFixed(1)}
+          <span className="ml-1 text-2xl font-medium text-accent/60">{unit}</span>
         </div>
       </div>
 

@@ -135,9 +135,11 @@ export default function BodyFatCalculator() {
         )}
       </div>
 
-      <div className="mt-6 rounded-xl border border-accent/20 bg-accent-soft p-5">
-        <div className="text-xs text-zinc-500 dark:text-zinc-400">Estimated body fat</div>
-        <div className="mt-1 text-3xl font-bold text-accent">
+      <div className="mt-6 rounded-2xl border border-accent/20 bg-accent-soft p-6">
+        <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          Estimated body fat
+        </div>
+        <div className="mt-1 text-6xl font-bold tracking-tight text-accent">
           {valid ? `${bodyFat.toFixed(1)}%` : "—"}
         </div>
         {!valid && (

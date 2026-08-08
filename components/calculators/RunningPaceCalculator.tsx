@@ -83,13 +83,21 @@ export default function RunningPaceCalculator() {
         </div>
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-            <div className="text-xs text-zinc-500 dark:text-zinc-400">Pace per km</div>
-            <div className="mt-1 text-xl font-bold">{formatDuration(paceSecPerKm)} /km</div>
+          <div className="rounded-2xl border border-black/10 p-5 dark:border-white/10">
+            <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              Pace per km
+            </div>
+            <div className="mt-1 text-3xl font-bold tracking-tight">
+              {formatDuration(paceSecPerKm)} <span className="text-lg text-zinc-400">/km</span>
+            </div>
           </div>
-          <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-            <div className="text-xs text-zinc-500 dark:text-zinc-400">Pace per mile</div>
-            <div className="mt-1 text-xl font-bold">{formatDuration(paceSecPerMile)} /mi</div>
+          <div className="rounded-2xl border border-black/10 p-5 dark:border-white/10">
+            <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              Pace per mile
+            </div>
+            <div className="mt-1 text-3xl font-bold tracking-tight">
+              {formatDuration(paceSecPerMile)} <span className="text-lg text-zinc-400">/mi</span>
+            </div>
           </div>
         </div>
       </div>
@@ -118,9 +126,13 @@ export default function RunningPaceCalculator() {
           ))}
         </div>
 
-        <div className="mt-4 rounded-xl border-2 border-accent bg-accent-soft p-5">
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">Predicted time</div>
-          <div className="mt-1 text-2xl font-bold text-accent">{formatDuration(predictedSeconds)}</div>
+        <div className="mt-4 rounded-2xl border-2 border-accent bg-accent-soft p-6">
+          <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+            Predicted time
+          </div>
+          <div className="mt-1 text-5xl font-bold tracking-tight text-accent">
+            {formatDuration(predictedSeconds)}
+          </div>
         </div>
       </div>
     </div>

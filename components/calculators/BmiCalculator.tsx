@@ -112,11 +112,15 @@ export default function BmiCalculator() {
         </div>
       )}
 
-      <div className="mt-6 rounded-xl border border-accent/20 bg-accent-soft p-5">
-        <div className="text-xs text-zinc-500 dark:text-zinc-400">Your BMI</div>
-        <div className="mt-1 text-3xl font-bold text-accent">{bmi > 0 ? bmi.toFixed(1) : "—"}</div>
+      <div className="mt-6 rounded-2xl border border-accent/20 bg-accent-soft p-6">
+        <div className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          Your BMI
+        </div>
+        <div className="mt-1 text-6xl font-bold tracking-tight text-accent">
+          {bmi > 0 ? bmi.toFixed(1) : "—"}
+        </div>
         {category && (
-          <div className={`mt-1 text-sm font-medium ${category.color}`}>
+          <div className={`mt-2 inline-block rounded-full bg-white px-3 py-1 text-sm font-semibold ${category.color} dark:bg-black/30`}>
             {category.label}
           </div>
         )}

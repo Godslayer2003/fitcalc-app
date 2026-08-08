@@ -1,0 +1,90 @@
+"use client";
+
+import { useState } from "react";
+
+type Unit = "kg" | "lb";
+
+const PERCENTAGES = [50, 60, 70, 75, 80, 85, 90, 95, 100];
+
+export default function OneRepMaxCalculator() {
+  const [weight, setWeight] = useState("100");
+  const [reps, setReps] = useState("5");
+  const [unit, setUnit] = useState<Unit>("kg");
+
+  const w = Math.max(0, parseFloat(weight) || 0);
+  const r = Math.max(1, parseFloat(reps) || 1);
+
+  const oneRepMax = r === 1 ? w : w * (1 + r / 30);
+
+  return (
+    <div>
+      <div className="mb-5 flex gap-2">
+        <button
+          onClick={() => setUnit("kg")}
+          className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+            unit === "kg"
+              ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
+              : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+          }`}
+        >
+          kg
+        </button>
+        <button
+          onClick={() => setUnit("lb")}
+          className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+            unit === "lb"
+              ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
+              : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+          }`}
+        >
+          lb
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label className="mb-1 block text-sm font-medium">Weight lifted ({unit})</label>
+          <input
+            type="number"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            className="w-full rounded-lg border border-black/15 bg-transparent px-3 py-2 text-sm dark:border-white/15"
+          />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium">Reps completed</label>
+          <input
+            type="number"
+            value={reps}
+            onChange={(e) => setReps(e.target.value)}
+            className="w-full rounded-lg border border-black/15 bg-transparent px-3 py-2 text-sm dark:border-white/15"
+          />
+        </div>
+      </div>
+
+      <div className="mt-6 rounded-xl border-2 border-zinc-900 p-5 dark:border-white">
+        <div className="text-xs text-zinc-500">Estimated one-rep max</div>
+        <div className="mt-1 text-3xl font-bold">
+          {oneRepMax.toFixed(1)} {unit}
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <h3 className="mb-2 text-sm font-medium">Training percentages</h3>
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
+          {PERCENTAGES.map((pct) => (
+            <div
+              key={pct}
+              className="rounded-lg border border-black/10 p-2 text-center dark:border-white/10"
+            >
+              <div className="text-xs text-zinc-500">{pct}%</div>
+              <div className="text-sm font-semibold">
+                {((oneRepMax * pct) / 100).toFixed(1)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

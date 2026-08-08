@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 
 const trustPoints = [
   { Icon: Zap, label: "Instant results" },
-  { Icon: Lock, label: "Nothing leaves your browser" },
+  { Icon: Lock, label: "Nothing leaves your device" },
   { Icon: CheckCircle2, label: "No sign-up to calculate" },
 ];
 

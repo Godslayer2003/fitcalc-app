@@ -20,11 +20,11 @@ export default function PrivacyPage() {
             The numbers you enter
           </h2>
           <p>
-            Every calculator on {siteConfig.name} runs entirely in your
-            browser using JavaScript. Height, weight, age, and any other
+            Every calculator on {siteConfig.name} runs entirely on your
+            device using JavaScript. Height, weight, age, and any other
             values you enter are never sent to our servers and are not
-            stored anywhere — they exist only in your browser tab while
-            you use the calculator.
+            stored anywhere — they exist only for as long as you&apos;re
+            using the calculator.
           </p>
         </section>
 

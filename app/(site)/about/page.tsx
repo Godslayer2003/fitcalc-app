@@ -15,8 +15,8 @@ export default function AboutPage() {
           {siteConfig.name} is a small set of health and fitness
           calculators — BMI, calorie needs, macros, body fat, one-rep max,
           heart rate zones, water intake, and running pace — all using
-          standard, published formulas. Every calculator runs client-side
-          in your browser, so nothing you enter is ever uploaded anywhere.
+          standard, published formulas. Every calculator runs entirely
+          on your device, so nothing you enter is ever uploaded anywhere.
         </p>
         <p>
           Every calculator is also available as a free embeddable widget —

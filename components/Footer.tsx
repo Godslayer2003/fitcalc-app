@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Activity } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { tools } from "@/lib/tools";
+import HideInApp from "@/components/HideInApp";
 
 export default function Footer() {
   return (
@@ -16,7 +17,7 @@ export default function Footer() {
               {siteConfig.name}
             </Link>
             <p className="mt-3 max-w-[22ch] text-sm text-zinc-500 dark:text-zinc-400">
-              Free fitness calculators that run entirely in your browser.
+              Free fitness calculators that run entirely on your device.
             </p>
           </div>
 
@@ -56,11 +57,13 @@ export default function Footer() {
                   Track your progress
                 </Link>
               </li>
-              <li>
-                <Link href="/embed" className="text-zinc-500 transition-colors hover:text-accent dark:text-zinc-400">
-                  Embed a calculator
-                </Link>
-              </li>
+              <HideInApp>
+                <li>
+                  <Link href="/embed" className="text-zinc-500 transition-colors hover:text-accent dark:text-zinc-400">
+                    Embed a calculator
+                  </Link>
+                </li>
+              </HideInApp>
               <li>
                 <Link href="/about" className="text-zinc-500 transition-colors hover:text-accent dark:text-zinc-400">
                   About
@@ -89,7 +92,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-black/10 pt-6 text-xs text-zinc-400 sm:flex-row dark:border-white/10">
-          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All calculations happen in your browser.</p>
+          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All calculations happen on your device.</p>
           <p>Not medical advice. For informational purposes only.</p>
         </div>
       </div>

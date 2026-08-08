@@ -31,7 +31,7 @@ export default function ToolPageHeader({
       <p className="mt-3 max-w-2xl text-zinc-500 dark:text-zinc-400">{description}</p>
       <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
         <Lock className="h-3 w-3" />
-        Runs entirely in your browser — nothing you enter is uploaded
+        Runs entirely on your device — nothing you enter is uploaded
       </div>
     </div>
   );

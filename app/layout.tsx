@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import { CLERK_ENABLED } from "@/lib/billing";
+import AdsPauseGate from "@/components/AdsPauseGate";
 
 const ADSENSE_CLIENT_ID = "ca-pub-2856226090534119";
 
@@ -51,7 +52,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="flex min-h-full flex-col bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
-        {CLERK_ENABLED ? <ClerkProvider>{children}</ClerkProvider> : children}
+        {CLERK_ENABLED ? (
+          <ClerkProvider>
+            <AdsPauseGate />
+            {children}
+          </ClerkProvider>
+        ) : (
+          children
+        )}
       </body>
     </html>
   );

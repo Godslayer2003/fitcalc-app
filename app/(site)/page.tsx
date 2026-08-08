@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Zap, Lock, CheckCircle2, TrendingUp, Scale } from "lucide-react";
 import { tools } from "@/lib/tools";
 import ToolCard from "@/components/ToolCard";
-import AdSlot from "@/components/AdSlot";
 import Reveal from "@/components/Reveal";
 
 const trustPoints = [
@@ -100,10 +99,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <div className="animate-fade-up mt-10 [animation-delay:340ms]">
-          <AdSlot />
-        </div>
       </div>
 
       <section id="calculators" className="mt-14 scroll-mt-20 border-t border-black/5 bg-zinc-50/60 py-14">
@@ -117,9 +112,6 @@ export default function Home() {
                 <ToolCard tool={tool} />
               </Reveal>
             ))}
-          </div>
-          <div className="mt-10">
-            <AdSlot />
           </div>
         </div>
       </section>

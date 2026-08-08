@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getTool } from "@/lib/tools";
 import ToolPageHeader from "@/components/ToolPageHeader";
-import AdSlot from "@/components/AdSlot";
 import ToolFaq from "@/components/ToolFaq";
 import AffiliateCallout from "@/components/AffiliateCallout";
 import Disclaimer from "@/components/Disclaimer";
@@ -20,9 +19,6 @@ export default function Page() {
       <ToolPageHeader name={tool.name} description={tool.description} category={tool.category} />
       <MacroCalculator />
       <Disclaimer />
-      <div className="mt-10">
-        <AdSlot />
-      </div>
       <AffiliateCallout
         heading="Tracking macros day to day?"
         body="A food scale and a tracking app make hitting these numbers far easier than eyeballing portions — worth it if you're serious about the targets above."
@@ -30,9 +26,6 @@ export default function Page() {
         href="#"
       />
       <ToolFaq tool={tool} />
-      <div className="mt-10">
-        <AdSlot />
-      </div>
     </div>
   );
 }

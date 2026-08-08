@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getTool } from "@/lib/tools";
 import ToolPageHeader from "@/components/ToolPageHeader";
-import AdSlot from "@/components/AdSlot";
 import ToolFaq from "@/components/ToolFaq";
 import Disclaimer from "@/components/Disclaimer";
 import WaterIntakeCalculator from "@/components/calculators/WaterIntakeCalculator";
@@ -19,13 +18,7 @@ export default function Page() {
       <ToolPageHeader name={tool.name} description={tool.description} category={tool.category} />
       <WaterIntakeCalculator />
       <Disclaimer />
-      <div className="mt-10">
-        <AdSlot />
-      </div>
       <ToolFaq tool={tool} />
-      <div className="mt-10">
-        <AdSlot />
-      </div>
     </div>
   );
 }

@@ -30,6 +30,9 @@ export default function Page() {
         href="#"
       />
       <ToolFaq tool={tool} />
+      <div className="mt-10">
+        <AdSlot />
+      </div>
     </div>
   );
 }

@@ -118,6 +118,9 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <div className="mt-10">
+            <AdSlot />
+          </div>
         </div>
       </section>
     </>

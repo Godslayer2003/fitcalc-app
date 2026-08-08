@@ -23,6 +23,9 @@ export default function Page() {
         <AdSlot />
       </div>
       <ToolFaq tool={tool} />
+      <div className="mt-10">
+        <AdSlot />
+      </div>
     </div>
   );
 }

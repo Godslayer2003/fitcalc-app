@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SaveProgressButton from "@/components/SaveProgressButton";
 
 type Sex = "male" | "female";
 type Units = "in" | "cm";
@@ -147,6 +148,9 @@ export default function BodyFatCalculator() {
             Waist measurement must be greater than neck measurement.
           </p>
         )}
+        <div>
+          <SaveProgressButton metric="bodyFat" value={valid ? bodyFat : null} />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/*
+ * FitCalc is light-mode only by design (a "black screen" on load reads as
+ * broken, not stylish, for a free utility site). Switching the dark variant
+ * to class-based means it simply never activates, since no .dark class is
+ * ever applied — existing dark: utility classes in components are harmless
+ * dead weight rather than something that needs stripping out everywhere.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -16,16 +25,6 @@
   --color-accent-soft: var(--color-accent-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --color-accent: #10b981;
-    --color-accent-hover: #34d399;
-    --color-accent-soft: rgba(16, 185, 129, 0.1);
-  }
 }
 
 body {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SaveProgressButton from "@/components/SaveProgressButton";
 
 type Units = "metric" | "imperial";
 
@@ -124,6 +125,9 @@ export default function BmiCalculator() {
             {category.label}
           </div>
         )}
+        <div>
+          <SaveProgressButton metric="bmi" value={bmi > 0 ? bmi : null} />
+        </div>
       </div>
     </div>
   );

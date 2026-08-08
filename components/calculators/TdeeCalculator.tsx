@@ -103,12 +103,12 @@ export default function TdeeCalculator() {
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-black/10 p-5 dark:border-white/10">
-          <div className="text-xs text-zinc-500">Base metabolic rate (BMR)</div>
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Base metabolic rate (BMR)</div>
           <div className="mt-1 text-2xl font-bold">{Math.round(bmr).toLocaleString()} kcal</div>
         </div>
-        <div className="rounded-xl border-2 border-zinc-900 p-5 dark:border-white">
-          <div className="text-xs text-zinc-500">Daily calories (TDEE)</div>
-          <div className="mt-1 text-2xl font-bold">{Math.round(tdee).toLocaleString()} kcal</div>
+        <div className="rounded-xl border-2 border-accent bg-accent-soft p-5">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Daily calories (TDEE)</div>
+          <div className="mt-1 text-2xl font-bold text-accent">{Math.round(tdee).toLocaleString()} kcal</div>
         </div>
       </div>
     </div>

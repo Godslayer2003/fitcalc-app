@@ -27,8 +27,8 @@ export default function WaterIntakeCalculator() {
           onClick={() => setUnit("kg")}
           className={`rounded-full px-4 py-1.5 text-sm font-medium ${
             unit === "kg"
-              ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
-              : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+              ? "bg-accent text-white"
+              : "border border-black/15 hover:border-accent hover:text-accent dark:border-white/15"
           }`}
         >
           kg
@@ -37,8 +37,8 @@ export default function WaterIntakeCalculator() {
           onClick={() => setUnit("lb")}
           className={`rounded-full px-4 py-1.5 text-sm font-medium ${
             unit === "lb"
-              ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
-              : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+              ? "bg-accent text-white"
+              : "border border-black/15 hover:border-accent hover:text-accent dark:border-white/15"
           }`}
         >
           lb
@@ -69,16 +69,16 @@ export default function WaterIntakeCalculator() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border-2 border-zinc-900 p-5 dark:border-white">
-          <div className="text-xs text-zinc-500">Liters</div>
-          <div className="mt-1 text-2xl font-bold">{totalL.toFixed(1)} L</div>
+        <div className="rounded-xl border-2 border-accent bg-accent-soft p-5">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Liters</div>
+          <div className="mt-1 text-2xl font-bold text-accent">{totalL.toFixed(1)} L</div>
         </div>
         <div className="rounded-xl border border-black/10 p-5 dark:border-white/10">
-          <div className="text-xs text-zinc-500">Fluid ounces</div>
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Fluid ounces</div>
           <div className="mt-1 text-2xl font-bold">{Math.round(totalOz)} oz</div>
         </div>
         <div className="rounded-xl border border-black/10 p-5 dark:border-white/10">
-          <div className="text-xs text-zinc-500">Cups</div>
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Cups</div>
           <div className="mt-1 text-2xl font-bold">{totalCups.toFixed(1)}</div>
         </div>
       </div>

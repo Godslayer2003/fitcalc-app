@@ -84,11 +84,11 @@ export default function RunningPaceCalculator() {
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-            <div className="text-xs text-zinc-500">Pace per km</div>
+            <div className="text-xs text-zinc-500 dark:text-zinc-400">Pace per km</div>
             <div className="mt-1 text-xl font-bold">{formatDuration(paceSecPerKm)} /km</div>
           </div>
           <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-            <div className="text-xs text-zinc-500">Pace per mile</div>
+            <div className="text-xs text-zinc-500 dark:text-zinc-400">Pace per mile</div>
             <div className="mt-1 text-xl font-bold">{formatDuration(paceSecPerMile)} /mi</div>
           </div>
         </div>
@@ -111,16 +111,16 @@ export default function RunningPaceCalculator() {
             <button
               key={d.label}
               onClick={() => setTargetKm(String(d.km))}
-              className="rounded-full border border-black/15 px-3 py-1.5 text-xs font-semibold hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+              className="rounded-full border border-black/15 px-3 py-1.5 text-xs font-semibold transition-colors hover:border-accent hover:text-accent dark:border-white/15"
             >
               {d.label}
             </button>
           ))}
         </div>
 
-        <div className="mt-4 rounded-xl border-2 border-zinc-900 p-5 dark:border-white">
-          <div className="text-xs text-zinc-500">Predicted time</div>
-          <div className="mt-1 text-2xl font-bold">{formatDuration(predictedSeconds)}</div>
+        <div className="mt-4 rounded-xl border-2 border-accent bg-accent-soft p-5">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Predicted time</div>
+          <div className="mt-1 text-2xl font-bold text-accent">{formatDuration(predictedSeconds)}</div>
         </div>
       </div>
     </div>

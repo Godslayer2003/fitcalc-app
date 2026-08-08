@@ -70,17 +70,17 @@ export default function MacroCalculator() {
       )}
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-          <div className="text-xs text-zinc-500">Protein</div>
-          <div className="mt-1 text-xl font-bold">{Math.round(proteinG)}g</div>
+        <div className="rounded-xl border border-accent/20 bg-accent-soft p-4">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Protein</div>
+          <div className="mt-1 text-xl font-bold text-accent">{Math.round(proteinG)}g</div>
         </div>
-        <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-          <div className="text-xs text-zinc-500">Carbs</div>
-          <div className="mt-1 text-xl font-bold">{Math.round(carbG)}g</div>
+        <div className="rounded-xl border border-accent/20 bg-accent-soft p-4">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Carbs</div>
+          <div className="mt-1 text-xl font-bold text-accent">{Math.round(carbG)}g</div>
         </div>
-        <div className="rounded-xl border border-black/10 p-4 dark:border-white/10">
-          <div className="text-xs text-zinc-500">Fat</div>
-          <div className="mt-1 text-xl font-bold">{Math.round(fatG)}g</div>
+        <div className="rounded-xl border border-accent/20 bg-accent-soft p-4">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">Fat</div>
+          <div className="mt-1 text-xl font-bold text-accent">{Math.round(fatG)}g</div>
         </div>
       </div>
     </div>

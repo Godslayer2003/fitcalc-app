@@ -33,11 +33,11 @@ export default function ToolFaq({ tool }: { tool: Tool }) {
   };
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 border-t border-black/10 pt-8 dark:border-white/10">
       <h2 className="mb-4 text-lg font-semibold">Frequently asked questions</h2>
       <div className="flex flex-col gap-4">
         {tool.faqs.map((faq) => (
-          <div key={faq.q}>
+          <div key={faq.q} className="border-l-2 border-accent/30 pl-4">
             <h3 className="text-sm font-medium">{faq.q}</h3>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
               {faq.a}

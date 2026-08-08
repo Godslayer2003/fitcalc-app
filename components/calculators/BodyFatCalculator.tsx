@@ -53,8 +53,8 @@ export default function BodyFatCalculator() {
             onClick={() => setSex("male")}
             className={`rounded-full px-4 py-1.5 text-sm font-medium ${
               sex === "male"
-                ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
-                : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+                ? "bg-accent text-white"
+                : "border border-black/15 hover:border-accent hover:text-accent dark:border-white/15"
             }`}
           >
             Male
@@ -63,8 +63,8 @@ export default function BodyFatCalculator() {
             onClick={() => setSex("female")}
             className={`rounded-full px-4 py-1.5 text-sm font-medium ${
               sex === "female"
-                ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
-                : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+                ? "bg-accent text-white"
+                : "border border-black/15 hover:border-accent hover:text-accent dark:border-white/15"
             }`}
           >
             Female
@@ -75,8 +75,8 @@ export default function BodyFatCalculator() {
             onClick={() => setUnits("in")}
             className={`rounded-full px-4 py-1.5 text-sm font-medium ${
               units === "in"
-                ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
-                : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+                ? "bg-accent text-white"
+                : "border border-black/15 hover:border-accent hover:text-accent dark:border-white/15"
             }`}
           >
             Inches
@@ -85,8 +85,8 @@ export default function BodyFatCalculator() {
             onClick={() => setUnits("cm")}
             className={`rounded-full px-4 py-1.5 text-sm font-medium ${
               units === "cm"
-                ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
-                : "border border-black/15 hover:bg-black/[.03] dark:border-white/15 dark:hover:bg-white/[.05]"
+                ? "bg-accent text-white"
+                : "border border-black/15 hover:border-accent hover:text-accent dark:border-white/15"
             }`}
           >
             cm
@@ -135,9 +135,9 @@ export default function BodyFatCalculator() {
         )}
       </div>
 
-      <div className="mt-6 rounded-xl border border-black/10 p-5 dark:border-white/10">
-        <div className="text-xs text-zinc-500">Estimated body fat</div>
-        <div className="mt-1 text-3xl font-bold">
+      <div className="mt-6 rounded-xl border border-accent/20 bg-accent-soft p-5">
+        <div className="text-xs text-zinc-500 dark:text-zinc-400">Estimated body fat</div>
+        <div className="mt-1 text-3xl font-bold text-accent">
           {valid ? `${bodyFat.toFixed(1)}%` : "—"}
         </div>
         {!valid && (

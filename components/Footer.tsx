@@ -10,13 +10,13 @@ export default function Footer() {
           calculations happen in your browser.
         </p>
         <div className="flex gap-4">
-          <Link href="/privacy" className="hover:opacity-70">
+          <Link href="/privacy" className="transition-colors hover:text-accent">
             Privacy
           </Link>
-          <Link href="/terms" className="hover:opacity-70">
+          <Link href="/terms" className="transition-colors hover:text-accent">
             Terms
           </Link>
-          <Link href="/about" className="hover:opacity-70">
+          <Link href="/about" className="transition-colors hover:text-accent">
             About
           </Link>
         </div>

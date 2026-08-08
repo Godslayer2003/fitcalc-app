@@ -3,11 +3,11 @@
 import { useState } from "react";
 
 const ZONES = [
-  { name: "Zone 1 — Very light", low: 50, high: 60 },
-  { name: "Zone 2 — Light (fat burn)", low: 60, high: 70 },
-  { name: "Zone 3 — Moderate (aerobic)", low: 70, high: 80 },
-  { name: "Zone 4 — Hard (anaerobic)", low: 80, high: 90 },
-  { name: "Zone 5 — Maximum", low: 90, high: 100 },
+  { name: "Zone 1 — Very light", low: 50, high: 60, bar: "bg-blue-400" },
+  { name: "Zone 2 — Light (fat burn)", low: 60, high: 70, bar: "bg-emerald-400" },
+  { name: "Zone 3 — Moderate (aerobic)", low: 70, high: 80, bar: "bg-accent" },
+  { name: "Zone 4 — Hard (anaerobic)", low: 80, high: 90, bar: "bg-amber-500" },
+  { name: "Zone 5 — Maximum", low: 90, high: 100, bar: "bg-red-500" },
 ];
 
 export default function HeartRateZoneCalculator() {
@@ -46,7 +46,7 @@ export default function HeartRateZoneCalculator() {
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-zinc-500">
+      <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">
         Estimated max heart rate: {maxHr.toFixed(0)} bpm (220 − age)
       </p>
 
@@ -54,9 +54,12 @@ export default function HeartRateZoneCalculator() {
         {ZONES.map((zone) => (
           <div
             key={zone.name}
-            className="flex items-center justify-between rounded-lg border border-black/10 px-4 py-2.5 text-sm dark:border-white/10"
+            className="flex items-center justify-between overflow-hidden rounded-lg border border-black/10 py-2.5 pr-4 text-sm dark:border-white/10"
           >
-            <span className="font-medium">{zone.name}</span>
+            <span className="flex items-center gap-3 font-medium">
+              <span className={`h-6 w-1.5 rounded-full ${zone.bar}`} />
+              {zone.name}
+            </span>
             <span className="font-mono text-zinc-600 dark:text-zinc-300">
               {targetAt(zone.low).toFixed(0)}–{targetAt(zone.high).toFixed(0)} bpm
             </span>

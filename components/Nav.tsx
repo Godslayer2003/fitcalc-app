@@ -16,14 +16,14 @@ export default function Nav() {
           </span>
           {siteConfig.name}
         </Link>
-        <nav className="flex items-center gap-6 text-sm font-medium">
+        <nav className="flex items-center gap-4 text-sm font-medium sm:gap-6">
           <Link href="/#calculators" className="text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300">
             Calculators
           </Link>
-          <Link href="/embed" className="text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300">
+          <Link href="/embed" className="hidden text-zinc-600 transition-colors hover:text-accent sm:inline dark:text-zinc-300">
             Embed
           </Link>
-          <Link href="/about" className="text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300">
+          <Link href="/about" className="hidden text-zinc-600 transition-colors hover:text-accent sm:inline dark:text-zinc-300">
             About
           </Link>
           {CLERK_ENABLED && <AuthSection />}

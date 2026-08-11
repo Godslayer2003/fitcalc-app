@@ -27,6 +27,14 @@ export default function PrivacyPage() {
             stored anywhere — they exist only for as long as you&apos;re
             using the calculator.
           </p>
+          <p>
+            The one exception: if you&apos;re signed in and tap &quot;Save
+            to progress&quot; on the BMI or Body Fat calculator, that
+            calculator&apos;s result (just the number and the date — not
+            your height, weight, or age) is stored on your account so you
+            can see your progress over time on the dashboard. This only
+            happens if you choose to save it.
+          </p>
         </section>
 
         <section>

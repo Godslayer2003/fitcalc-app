@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Show, SignIn, useUser, useClerk } from "@clerk/nextjs";
 import {
   CheckCircle2,
@@ -64,10 +64,8 @@ function DashboardAuthGate() {
 function DashboardContent() {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const [deleting, setDeleting] = useState(false);
   const [refreshing, setRefreshing] = useState(
     () => searchParams.get("success") === "1",
   );
@@ -107,22 +105,6 @@ function DashboardContent() {
       }
     } catch {
       setLoading(false);
-    }
-  }
-
-  async function handleDeleteAccount() {
-    if (!user) return;
-    const confirmed = window.confirm(
-      "Delete your account and all saved progress? This can't be undone.",
-    );
-    if (!confirmed) return;
-    setDeleting(true);
-    try {
-      await user.delete();
-      router.push("/");
-    } catch {
-      setDeleting(false);
-      window.alert("Couldn't delete your account. Please try again or email us for help.");
     }
   }
 
@@ -230,14 +212,6 @@ function DashboardContent() {
           </div>
         )}
       </div>
-
-      <button
-        onClick={handleDeleteAccount}
-        disabled={deleting}
-        className="self-start text-xs font-medium text-zinc-400 underline decoration-dotted transition-colors hover:text-red-500 disabled:opacity-60"
-      >
-        {deleting ? "Deleting account…" : "Delete account and all saved data"}
-      </button>
     </div>
   );
 }

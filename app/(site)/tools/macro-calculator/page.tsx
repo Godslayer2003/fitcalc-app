@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTool } from "@/lib/tools";
 import ToolPageHeader from "@/components/ToolPageHeader";
 import ToolFaq from "@/components/ToolFaq";
+import ToolArticle from "@/components/ToolArticle";
 import AffiliateCallout from "@/components/AffiliateCallout";
 import Disclaimer from "@/components/Disclaimer";
 import MacroCalculator from "@/components/calculators/MacroCalculator";
@@ -25,6 +26,7 @@ export default function Page() {
         ctaLabel="See recommended gear"
         href="#"
       />
+      <ToolArticle sections={tool.sections} />
       <ToolFaq tool={tool} />
     </div>
   );

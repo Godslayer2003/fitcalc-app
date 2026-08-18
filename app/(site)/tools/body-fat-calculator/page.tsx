@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTool } from "@/lib/tools";
 import ToolPageHeader from "@/components/ToolPageHeader";
 import ToolFaq from "@/components/ToolFaq";
+import ToolArticle from "@/components/ToolArticle";
 import Disclaimer from "@/components/Disclaimer";
 import BodyFatCalculator from "@/components/calculators/BodyFatCalculator";
 
@@ -18,6 +19,7 @@ export default function Page() {
       <ToolPageHeader name={tool.name} description={tool.description} category={tool.category} />
       <BodyFatCalculator />
       <Disclaimer />
+      <ToolArticle sections={tool.sections} />
       <ToolFaq tool={tool} />
     </div>
   );

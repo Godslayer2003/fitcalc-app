@@ -15,11 +15,11 @@ export type ProgressLog = Record<ProgressMetric, ProgressEntry[]>;
 const MAX_ENTRIES_PER_METRIC = 60;
 const EMPTY_LOG: ProgressLog = { bmi: [], bodyFat: [] };
 
-export function getProgressLog(metadata: Record<string, unknown> | null | undefined): ProgressLog {
-  const raw = (metadata?.progress as Partial<ProgressLog>) ?? {};
+export function getProgressLog(raw: unknown): ProgressLog {
+  const parsed = (raw as Partial<ProgressLog>) ?? {};
   return {
-    bmi: raw.bmi ?? [],
-    bodyFat: raw.bodyFat ?? [],
+    bmi: parsed.bmi ?? [],
+    bodyFat: parsed.bodyFat ?? [],
   };
 }
 

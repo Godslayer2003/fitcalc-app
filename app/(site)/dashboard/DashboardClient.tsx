@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Show, SignIn, useUser, useClerk } from "@clerk/nextjs";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   CheckCircle2,
   Calculator,
@@ -13,15 +12,16 @@ import {
   TrendingUp,
   Sparkles,
 } from "lucide-react";
-import { CUSTOM_CALCULATOR_PRICE_LABEL, CLERK_ENABLED } from "@/lib/billing";
-import { isAdminEmail } from "@/lib/admin";
-import { getProgressLog, PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
+import { CUSTOM_CALCULATOR_PRICE_LABEL, AUTH_ENABLED } from "@/lib/billing";
+import { PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
 import CustomCalculator from "@/components/calculators/CustomCalculator";
+import AuthForm from "@/components/AuthForm";
+import { useAuth } from "@/components/AuthProvider";
 import { siteConfig } from "@/lib/site";
 
 export default function DashboardClient() {
-  if (!CLERK_ENABLED) {
+  if (!AUTH_ENABLED) {
     return (
       <div className="mx-auto max-w-md px-4 py-14 text-center sm:px-6">
         <Construction className="mx-auto h-8 w-8 text-zinc-400" />
@@ -35,67 +35,66 @@ export default function DashboardClient() {
   return <DashboardAuthGate />;
 }
 
-/**
- * Isolated so <Show> only ever mounts when CLERK_ENABLED is true, i.e.
- * when a ClerkProvider is actually mounted above it in the tree.
- */
 function DashboardAuthGate() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex justify-center py-24">
+        <Loader2 className="h-6 w-6 animate-spin text-zinc-400" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="mx-auto max-w-md px-4 py-14 text-center sm:px-6">
+        <h1 className="text-2xl font-bold tracking-tight">Sign in to {siteConfig.name}</h1>
+        <p className="mx-auto mt-2 max-w-sm text-sm text-zinc-500">
+          {siteConfig.description} Sign in to save your results and watch your
+          progress over time — or unlock the custom calculator for a one-time payment.
+        </p>
+        <AuthForm />
+      </div>
+    );
+  }
+
   return (
-    <>
-      <Show when="signed-out">
-        <div className="mx-auto max-w-md px-4 py-14 text-center sm:px-6">
-          <h1 className="text-2xl font-bold tracking-tight">Sign in to {siteConfig.name}</h1>
-          <p className="mx-auto mt-2 max-w-sm text-sm text-zinc-500">
-            {siteConfig.description} Sign in to save your results and watch your
-            progress over time — or unlock the custom calculator for a one-time payment.
-          </p>
-          <div className="mt-6 flex justify-center">
-            <SignIn routing="hash" />
-          </div>
-        </div>
-      </Show>
-      <Show when="signed-in">
-        <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6">
-          <DashboardContent />
-        </div>
-      </Show>
-    </>
+    <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6">
+      <DashboardContent />
+    </div>
   );
 }
 
 function DashboardContent() {
-  const { user } = useUser();
-  const { signOut } = useClerk();
+  const { user, logout, refresh } = useAuth();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [refreshing, setRefreshing] = useState(
-    () => searchParams.get("success") === "1",
-  );
-  const isAdmin = isAdminEmail(user?.primaryEmailAddress?.emailAddress);
-  const customCalculatorUnlocked =
-    isAdmin || user?.publicMetadata?.customCalculatorUnlocked === true;
-  const progress = getProgressLog(user?.unsafeMetadata);
-  const metrics = Object.keys(PROGRESS_METRICS) as ProgressMetric[];
-  const hasProgress = metrics.some((m) => progress[m].length > 0);
+  const [verifying, setVerifying] = useState(false);
+
+  const stripeSessionId = searchParams.get("stripe_session_id");
 
   useEffect(() => {
-    if (!refreshing || !user || customCalculatorUnlocked) return;
-    let cancelled = false;
-    let attempts = 0;
-    const poll = async () => {
-      attempts += 1;
-      await user.reload();
-      if (cancelled || attempts >= 6) {
-        setRefreshing(false);
-        return;
-      }
-      setTimeout(poll, 1500);
-    };
-    poll();
-    return () => {
-      cancelled = true;
-    };
-  }, [refreshing, user, customCalculatorUnlocked]);
+    if (!stripeSessionId) return;
+    setVerifying(true);
+    fetch("/api/checkout/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId: stripeSessionId }),
+    })
+      .then(() => refresh())
+      .finally(() => {
+        setVerifying(false);
+        router.replace("/dashboard");
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stripeSessionId]);
+
+  if (!user) return null;
+
+  const metrics = Object.keys(PROGRESS_METRICS) as ProgressMetric[];
+  const hasProgress = metrics.some((m) => user.progress[m].length > 0);
 
   async function handleUnlock() {
     setLoading(true);
@@ -116,13 +115,11 @@ function DashboardContent() {
     <div className="flex flex-col gap-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">
-            Welcome{user?.firstName ? `, ${user.firstName}` : ""}
-          </h1>
-          <p className="mt-1 text-sm text-zinc-500">{user?.primaryEmailAddress?.emailAddress}</p>
+          <h1 className="text-2xl font-bold tracking-tight">Welcome</h1>
+          <p className="mt-1 text-sm text-zinc-500">{user.email}</p>
         </div>
         <button
-          onClick={() => signOut({ redirectUrl: "/" })}
+          onClick={() => logout()}
           className="flex shrink-0 items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-1.5 text-xs font-semibold transition-colors hover:border-red-400 hover:text-red-500"
         >
           <LogOut className="h-3.5 w-3.5" />
@@ -136,7 +133,7 @@ function DashboardContent() {
           Custom calculator
         </h2>
         <div className="mt-3">
-          {customCalculatorUnlocked ? (
+          {user.customCalculatorUnlocked ? (
             <>
               <div className="flex items-center gap-2 text-accent">
                 <CheckCircle2 className="h-5 w-5" />
@@ -146,7 +143,7 @@ function DashboardContent() {
                 <CustomCalculator />
               </div>
             </>
-          ) : refreshing ? (
+          ) : verifying ? (
             <div className="flex items-center gap-2 text-zinc-500">
               <Loader2 className="h-5 w-5 animate-spin" />
               <span className="font-medium">Confirming your payment…</span>
@@ -178,18 +175,18 @@ function DashboardContent() {
         {hasProgress ? (
           <div className="mt-4 flex flex-col gap-6">
             {metrics.map((metric) =>
-              progress[metric].length > 0 ? (
+              user.progress[metric].length > 0 ? (
                 <div key={metric}>
                   <div className="flex items-baseline justify-between">
                     <h3 className="font-semibold">{PROGRESS_METRICS[metric].label}</h3>
                     <span className="text-sm text-zinc-500">
-                      Latest: {progress[metric][progress[metric].length - 1].value}
+                      Latest: {user.progress[metric][user.progress[metric].length - 1].value}
                       {PROGRESS_METRICS[metric].unit}
                     </span>
                   </div>
-                  <Sparkline data={progress[metric]} />
+                  <Sparkline data={user.progress[metric]} />
                   <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-500">
-                    {progress[metric]
+                    {user.progress[metric]
                       .slice(-6)
                       .reverse()
                       .map((entry) => (

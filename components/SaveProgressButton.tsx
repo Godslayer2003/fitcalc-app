@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
 import { Bookmark, Check } from "lucide-react";
-import { appendProgressEntry, getProgressLog, type ProgressMetric } from "@/lib/progress";
-import { CLERK_ENABLED } from "@/lib/billing";
+import type { ProgressMetric } from "@/lib/progress";
+import { AUTH_ENABLED } from "@/lib/billing";
+import { useAuth } from "@/components/AuthProvider";
 
 /**
- * Only renders once CLERK_ENABLED (accounts are live) and once there's a
+ * Only renders once AUTH_ENABLED (accounts are live) and once there's a
  * valid value to save. Hidden entirely for signed-out visitors — saving
  * progress is one of the two things that actually requires an account.
  */
@@ -18,23 +18,26 @@ export default function SaveProgressButton({
   metric: ProgressMetric;
   value: number | null;
 }) {
-  if (!CLERK_ENABLED || value === null || !Number.isFinite(value)) return null;
+  if (!AUTH_ENABLED || value === null || !Number.isFinite(value)) return null;
   return <SaveProgressButtonInner metric={metric} value={value} />;
 }
 
 function SaveProgressButtonInner({ metric, value }: { metric: ProgressMetric; value: number }) {
-  const { user, isSignedIn } = useUser();
+  const { user, refresh } = useAuth();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  if (!isSignedIn) return null;
+  if (!user) return null;
 
   async function handleSave() {
-    if (!user || saving) return;
+    if (saving) return;
     setSaving(true);
-    const existing = getProgressLog(user.unsafeMetadata);
-    const updated = appendProgressEntry(existing, metric, value);
-    await user.update({ unsafeMetadata: { ...user.unsafeMetadata, progress: updated } });
+    await fetch("/api/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ metric, value }),
+    });
+    await refresh();
     setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);

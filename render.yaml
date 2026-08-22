@@ -1,20 +1,28 @@
+databases:
+  - name: fitcalc-db
+    plan: free
+    databaseName: fitcalc
+    user: fitcalc
+
 services:
   - type: web
     name: fitcalc-app
     runtime: node
     plan: free
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci && npx prisma generate && npx prisma db push --accept-data-loss && npm run build
     startCommand: npm start -- -p $PORT
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
-      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-        sync: false
-      - key: CLERK_SECRET_KEY
-        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fitcalc-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAILS
+        value: ethan10038@gmail.com
       - key: STRIPE_SECRET_KEY
-        sync: false
-      - key: STRIPE_WEBHOOK_SECRET
         sync: false
       - key: NEXT_PUBLIC_SITE_URL
         sync: false

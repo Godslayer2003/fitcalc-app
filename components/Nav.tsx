@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { Activity, LayoutDashboard } from "lucide-react";
-import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 import { siteConfig } from "@/lib/site";
-import { CLERK_ENABLED } from "@/lib/billing";
+import { AUTH_ENABLED } from "@/lib/billing";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Nav() {
   return (
@@ -26,37 +26,42 @@ export default function Nav() {
           <Link href="/about" className="hidden text-zinc-600 transition-colors hover:text-accent sm:inline dark:text-zinc-300">
             About
           </Link>
-          {CLERK_ENABLED && <AuthSection />}
+          {AUTH_ENABLED && <AuthSection />}
         </nav>
       </div>
     </header>
   );
 }
 
-/**
- * Isolated so <Show> only ever mounts when CLERK_ENABLED is true, i.e.
- * when a ClerkProvider is actually mounted above it in the tree.
- */
 function AuthSection() {
+  const { user, logout } = useAuth();
+
+  if (!user) {
+    return (
+      <Link
+        href="/dashboard"
+        className="rounded-full border border-black/15 px-3.5 py-1.5 text-xs font-semibold transition-colors hover:border-accent hover:text-accent dark:border-white/15"
+      >
+        Sign in
+      </Link>
+    );
+  }
+
   return (
     <>
-      <Show when="signed-out">
-        <SignInButton mode="modal">
-          <button className="rounded-full border border-black/15 px-3.5 py-1.5 text-xs font-semibold transition-colors hover:border-accent hover:text-accent dark:border-white/15">
-            Sign in
-          </button>
-        </SignInButton>
-      </Show>
-      <Show when="signed-in">
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-1.5 text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300"
-        >
-          <LayoutDashboard className="h-4 w-4" />
-          Dashboard
-        </Link>
-        <UserButton />
-      </Show>
+      <Link
+        href="/dashboard"
+        className="flex items-center gap-1.5 text-zinc-600 transition-colors hover:text-accent dark:text-zinc-300"
+      >
+        <LayoutDashboard className="h-4 w-4" />
+        Dashboard
+      </Link>
+      <button
+        onClick={() => logout()}
+        className="text-xs font-semibold text-zinc-500 transition-colors hover:text-red-500"
+      >
+        Sign out
+      </button>
     </>
   );
 }

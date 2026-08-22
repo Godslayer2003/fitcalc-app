@@ -69,12 +69,13 @@ export default function PrivacyPage() {
           <p>
             Creating an account is entirely optional and only needed if you
             want to save your progress or unlock the custom calculator. If
-            you sign in, our authentication provider (Clerk) stores your
-            email address and basic account details. If you pay to unlock
-            the custom calculator, our payment processor (Stripe) handles
-            your card details directly — we never see or store your full
-            card number. We only receive confirmation that a payment
-            succeeded, which we use to mark your account as unlocked.
+            you create an account, your email address and a securely hashed
+            password (we never store your password in plain text) are
+            stored directly in our own database. If you pay to unlock the
+            custom calculator, our payment processor (Stripe) handles your
+            card details directly — we never see or store your full card
+            number. We only receive confirmation that a payment succeeded,
+            which we use to mark your account as unlocked.
           </p>
         </section>
 

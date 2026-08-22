@@ -39,13 +39,12 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Analytics and ads
+            Analytics
           </h2>
           <p>
-            We may use privacy-respecting analytics and third-party
-            advertising (such as Google AdSense) to support {siteConfig.name}.
-            These services may use cookies or similar technologies as
-            described in their own privacy policies.
+            We may use privacy-respecting analytics to understand how{" "}
+            {siteConfig.name} is used. {siteConfig.name} does not currently
+            show third-party advertising.
           </p>
         </section>
 
@@ -69,12 +68,13 @@ export default function PrivacyPage() {
           </h2>
           <p>
             Creating an account is entirely optional and only needed if you
-            want to remove ads. If you sign in, our authentication provider
-            (Clerk) stores your email address and basic account details.
-            If you pay to remove ads, our payment processor (Stripe) handles
+            want to save your progress or unlock the custom calculator. If
+            you sign in, our authentication provider (Clerk) stores your
+            email address and basic account details. If you pay to unlock
+            the custom calculator, our payment processor (Stripe) handles
             your card details directly — we never see or store your full
             card number. We only receive confirmation that a payment
-            succeeded, which we use to mark your account ad-free.
+            succeeded, which we use to mark your account as unlocked.
           </p>
         </section>
 

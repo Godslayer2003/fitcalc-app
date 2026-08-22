@@ -23,8 +23,7 @@ export default function AboutPage() {
           time and watch your progress on a simple chart.
         </p>
         <p>
-          {siteConfig.name} is supported by unobtrusive ads. Questions,
-          bug reports, or ideas for a new calculator? Email{" "}
+          Questions, bug reports, or ideas for a new calculator? Email{" "}
           <a href="mailto:ethan10038@gmail.com" className="underline">
             ethan10038@gmail.com
           </a>

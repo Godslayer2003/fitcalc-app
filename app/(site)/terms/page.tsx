@@ -60,15 +60,15 @@ export default function TermsPage() {
 
         <section>
           <h2 className="mb-1.5 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Remove Ads purchase
+            Custom Calculator purchase
           </h2>
           <p>
-            The one-time &quot;Remove Ads&quot; payment removes display ads
-            from calculator pages for your signed-in account, permanently,
-            on a one-time-payment basis. It doesn&apos;t include a warranty
-            of any kind and isn&apos;t refundable except where required by
-            law, since it applies immediately after payment. Payments are
-            processed by Stripe; we don&apos;t store your card details.
+            The one-time &quot;Custom Calculator&quot; payment unlocks a
+            build-your-own calculator tool, permanently, on your signed-in
+            account. It doesn&apos;t include a warranty of any kind and
+            isn&apos;t refundable except where required by law, since it
+            applies immediately after payment. Payments are processed by
+            Stripe; we don&apos;t store your card details.
           </p>
         </section>
 

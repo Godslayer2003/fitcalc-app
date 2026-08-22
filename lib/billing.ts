@@ -1,5 +1,5 @@
-export const REMOVE_ADS_PRICE_CENTS = 1050;
-export const REMOVE_ADS_PRICE_LABEL = "$10.50";
+export const CUSTOM_CALCULATOR_PRICE_CENTS = 500;
+export const CUSTOM_CALCULATOR_PRICE_LABEL = "$5";
 
 /**
  * True once real Clerk keys are configured. Lets auth UI degrade gracefully

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import Stripe from "stripe";
-import { REMOVE_ADS_PRICE_CENTS, CLERK_ENABLED } from "@/lib/billing";
+import { CUSTOM_CALCULATOR_PRICE_CENTS, CLERK_ENABLED } from "@/lib/billing";
 import { siteConfig } from "@/lib/site";
 
 export async function POST() {
@@ -18,8 +18,8 @@ export async function POST() {
   }
 
   const user = await currentUser();
-  if (user?.publicMetadata?.adsRemoved === true) {
-    return NextResponse.json({ error: "Ads already removed" }, { status: 400 });
+  if (user?.publicMetadata?.customCalculatorUnlocked === true) {
+    return NextResponse.json({ error: "Custom calculator already unlocked" }, { status: 400 });
   }
 
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -37,8 +37,8 @@ export async function POST() {
       {
         price_data: {
           currency: "usd",
-          product_data: { name: "Remove Ads — FitCalc (one-time)" },
-          unit_amount: REMOVE_ADS_PRICE_CENTS,
+          product_data: { name: "Custom Calculator — FitCalc (one-time)" },
+          unit_amount: CUSTOM_CALCULATOR_PRICE_CENTS,
         },
         quantity: 1,
       },

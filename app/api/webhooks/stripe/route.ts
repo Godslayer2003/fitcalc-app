@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     if (clerkUserId) {
       const clerk = await clerkClient();
       await clerk.users.updateUserMetadata(clerkUserId, {
-        publicMetadata: { adsRemoved: true },
+        publicMetadata: { customCalculatorUnlocked: true },
       });
     }
   }

@@ -6,16 +6,17 @@ import { useSearchParams } from "next/navigation";
 import { Show, SignIn, useUser, useClerk } from "@clerk/nextjs";
 import {
   CheckCircle2,
-  ShieldOff,
+  Calculator,
   Loader2,
   Construction,
   LogOut,
   TrendingUp,
   Sparkles,
 } from "lucide-react";
-import { REMOVE_ADS_PRICE_LABEL, CLERK_ENABLED } from "@/lib/billing";
+import { CUSTOM_CALCULATOR_PRICE_LABEL, CLERK_ENABLED } from "@/lib/billing";
 import { getProgressLog, PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
+import CustomCalculator from "@/components/calculators/CustomCalculator";
 import { siteConfig } from "@/lib/site";
 
 export default function DashboardClient() {
@@ -25,7 +26,7 @@ export default function DashboardClient() {
         <Construction className="mx-auto h-8 w-8 text-zinc-400" />
         <h1 className="mt-3 text-2xl font-bold tracking-tight">Accounts coming soon</h1>
         <p className="mt-2 text-sm text-zinc-500">
-          Sign-in and the ad-free option aren&apos;t switched on yet — check back shortly.
+          Sign-in and the custom calculator aren&apos;t switched on yet — check back shortly.
         </p>
       </div>
     );
@@ -45,7 +46,7 @@ function DashboardAuthGate() {
           <h1 className="text-2xl font-bold tracking-tight">Sign in to {siteConfig.name}</h1>
           <p className="mx-auto mt-2 max-w-sm text-sm text-zinc-500">
             {siteConfig.description} Sign in to save your results and watch your
-            progress over time — or remove ads for a one-time payment.
+            progress over time — or unlock the custom calculator for a one-time payment.
           </p>
           <div className="mt-6 flex justify-center">
             <SignIn routing="hash" />
@@ -69,13 +70,13 @@ function DashboardContent() {
   const [refreshing, setRefreshing] = useState(
     () => searchParams.get("success") === "1",
   );
-  const adsRemoved = user?.publicMetadata?.adsRemoved === true;
+  const customCalculatorUnlocked = user?.publicMetadata?.customCalculatorUnlocked === true;
   const progress = getProgressLog(user?.unsafeMetadata);
   const metrics = Object.keys(PROGRESS_METRICS) as ProgressMetric[];
   const hasProgress = metrics.some((m) => progress[m].length > 0);
 
   useEffect(() => {
-    if (!refreshing || !user || adsRemoved) return;
+    if (!refreshing || !user || customCalculatorUnlocked) return;
     let cancelled = false;
     let attempts = 0;
     const poll = async () => {
@@ -91,9 +92,9 @@ function DashboardContent() {
     return () => {
       cancelled = true;
     };
-  }, [refreshing, user, adsRemoved]);
+  }, [refreshing, user, customCalculatorUnlocked]);
 
-  async function handleRemoveAds() {
+  async function handleUnlock() {
     setLoading(true);
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
@@ -127,13 +128,21 @@ function DashboardContent() {
       </div>
 
       <div className="rounded-2xl border border-black/10 p-6">
-        <h2 className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Ads</h2>
+        <h2 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+          <Calculator className="h-3.5 w-3.5" />
+          Custom calculator
+        </h2>
         <div className="mt-3">
-          {adsRemoved ? (
-            <div className="flex items-center gap-2 text-accent">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-semibold">Ads removed — thank you!</span>
-            </div>
+          {customCalculatorUnlocked ? (
+            <>
+              <div className="flex items-center gap-2 text-accent">
+                <CheckCircle2 className="h-5 w-5" />
+                <span className="font-semibold">Unlocked — build your own calculator below</span>
+              </div>
+              <div className="mt-4">
+                <CustomCalculator />
+              </div>
+            </>
           ) : refreshing ? (
             <div className="flex items-center gap-2 text-zinc-500">
               <Loader2 className="h-5 w-5 animate-spin" />
@@ -141,21 +150,17 @@ function DashboardContent() {
             </div>
           ) : (
             <>
-              <div className="flex items-center gap-2">
-                <ShieldOff className="h-5 w-5 text-zinc-400" />
-                <span className="font-semibold">Ads are currently shown</span>
-              </div>
-              <p className="mt-2 text-sm text-zinc-500">
-                Make a one-time payment to remove ads from every calculator,
-                permanently, on this account. Signing out shows ads again
-                until you sign back in.
+              <p className="text-sm text-zinc-500">
+                Define your own variables and formula and get a custom
+                calculator that works exactly the way you want, permanently,
+                on this account.
               </p>
               <button
-                onClick={handleRemoveAds}
+                onClick={handleUnlock}
                 disabled={loading}
                 className="mt-4 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
               >
-                {loading ? "Redirecting…" : `Remove ads — ${REMOVE_ADS_PRICE_LABEL}`}
+                {loading ? "Redirecting…" : `Unlock custom calculator — ${CUSTOM_CALCULATOR_PRICE_LABEL}`}
               </button>
             </>
           )}

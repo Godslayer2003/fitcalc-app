@@ -4,9 +4,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import { CLERK_ENABLED } from "@/lib/billing";
-import AdsPauseGate from "@/components/AdsPauseGate";
-
-const ADSENSE_CLIENT_ID = "ca-pub-2856226090534119";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,19 +41,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className="flex min-h-full flex-col bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
         {CLERK_ENABLED ? (
-          <ClerkProvider>
-            <AdsPauseGate />
-            {children}
-          </ClerkProvider>
+          <ClerkProvider>{children}</ClerkProvider>
         ) : (
           children
         )}

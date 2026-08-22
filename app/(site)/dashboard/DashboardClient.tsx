@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { CUSTOM_CALCULATOR_PRICE_LABEL, CLERK_ENABLED } from "@/lib/billing";
+import { isAdminEmail } from "@/lib/admin";
 import { getProgressLog, PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
 import CustomCalculator from "@/components/calculators/CustomCalculator";
@@ -70,7 +71,9 @@ function DashboardContent() {
   const [refreshing, setRefreshing] = useState(
     () => searchParams.get("success") === "1",
   );
-  const customCalculatorUnlocked = user?.publicMetadata?.customCalculatorUnlocked === true;
+  const isAdmin = isAdminEmail(user?.primaryEmailAddress?.emailAddress);
+  const customCalculatorUnlocked =
+    isAdmin || user?.publicMetadata?.customCalculatorUnlocked === true;
   const progress = getProgressLog(user?.unsafeMetadata);
   const metrics = Object.keys(PROGRESS_METRICS) as ProgressMetric[];
   const hasProgress = metrics.some((m) => progress[m].length > 0);

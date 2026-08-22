@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import Stripe from "stripe";
 import { CUSTOM_CALCULATOR_PRICE_CENTS, CLERK_ENABLED } from "@/lib/billing";
+import { isAdminEmail } from "@/lib/admin";
 import { siteConfig } from "@/lib/site";
 
 export async function POST() {
@@ -18,7 +19,10 @@ export async function POST() {
   }
 
   const user = await currentUser();
-  if (user?.publicMetadata?.customCalculatorUnlocked === true) {
+  const alreadyUnlocked =
+    user?.publicMetadata?.customCalculatorUnlocked === true ||
+    isAdminEmail(user?.primaryEmailAddress?.emailAddress);
+  if (alreadyUnlocked) {
     return NextResponse.json({ error: "Custom calculator already unlocked" }, { status: 400 });
   }
 

@@ -1,9 +1,3 @@
-databases:
-  - name: fitcalc-db
-    plan: free
-    databaseName: fitcalc
-    user: fitcalc
-
 services:
   - type: web
     name: fitcalc-app
@@ -15,9 +9,7 @@ services:
       - key: NODE_VERSION
         value: 20.18.0
       - key: DATABASE_URL
-        fromDatabase:
-          name: fitcalc-db
-          property: connectionString
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: ADMIN_EMAILS

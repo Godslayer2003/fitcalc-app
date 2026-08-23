@@ -17,6 +17,7 @@ import { PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
 import CustomCalculator from "@/components/calculators/CustomCalculator";
 import AuthForm from "@/components/AuthForm";
+import HideInApp from "@/components/HideInApp";
 import { useAuth } from "@/components/AuthProvider";
 import { siteConfig } from "@/lib/site";
 
@@ -156,7 +157,15 @@ function DashboardContent() {
               <span className="font-medium">Confirming your payment…</span>
             </div>
           ) : (
-            <>
+            <HideInApp
+              fallback={
+                <p className="text-sm text-zinc-500">
+                  To unlock the custom calculator, open{" "}
+                  <span className="font-medium">{siteConfig.url.replace(/^https?:\/\//, "")}</span>{" "}
+                  in your phone&apos;s browser instead of this app.
+                </p>
+              }
+            >
               <p className="text-sm text-zinc-500">
                 Define your own variables and formula and get a custom
                 calculator that works exactly the way you want, permanently,
@@ -169,7 +178,7 @@ function DashboardContent() {
               >
                 {loading ? "Redirecting…" : `Unlock custom calculator — ${CUSTOM_CALCULATOR_PRICE_LABEL}`}
               </button>
-            </>
+            </HideInApp>
           )}
         </div>
       </div>

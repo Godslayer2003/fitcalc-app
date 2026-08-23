@@ -9,11 +9,17 @@ import { useState, type ReactNode } from "react";
  * standalone, which is true both for the Play Store TWA and for the site
  * installed as a PWA, but false for a normal mobile browser tab.
  */
-export default function HideInApp({ children }: { children: ReactNode }) {
+export default function HideInApp({
+  children,
+  fallback = null,
+}: {
+  children: ReactNode;
+  fallback?: ReactNode;
+}) {
   const [isStandalone] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(display-mode: standalone)").matches,
   );
 
-  if (isStandalone) return null;
+  if (isStandalone) return <>{fallback}</>;
   return <>{children}</>;
 }

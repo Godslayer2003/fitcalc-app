@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Bookmark, Check } from "lucide-react";
 import type { ProgressMetric } from "@/lib/progress";
-import { API_URL } from "@/lib/api";
 import { useAuth } from "@/components/AuthProvider";
 
 /**
@@ -27,7 +26,7 @@ export default function SaveProgressButton({
   async function handleSave() {
     if (saving || value === null) return;
     setSaving(true);
-    await fetch(`${API_URL}/api/progress`, {
+    await fetch("/api/progress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

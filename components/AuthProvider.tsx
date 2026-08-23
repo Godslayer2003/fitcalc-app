@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { API_URL } from "@/lib/api";
 import type { ProgressLog } from "@/lib/progress";
 
 const STORAGE_KEY = "fitcalc-auth-token";
@@ -30,7 +29,7 @@ async function authRequest(
   path: string,
   body: unknown,
 ): Promise<{ ok: boolean; accessToken?: string; error?: string }> {
-  const res = await fetch(`${API_URL}${path}`, {
+  const res = await fetch(path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -50,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function refreshWithToken(t: string | null) {
     try {
-      const res = await fetch(`${API_URL}/api/auth/me`, {
+      const res = await fetch("/api/auth/me", {
         headers: t ? { Authorization: `Bearer ${t}` } : {},
       });
       const data = await res.json();

@@ -13,7 +13,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { CUSTOM_CALCULATOR_PRICE_LABEL } from "@/lib/billing";
-import { API_URL } from "@/lib/api";
 import { PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
 import CustomCalculator from "@/components/calculators/CustomCalculator";
@@ -80,7 +79,7 @@ function DashboardContent() {
   useEffect(() => {
     if (!stripeSessionId) return;
     setVerifying(true);
-    fetch(`${API_URL}/api/checkout/verify`, {
+    fetch("/api/checkout/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +103,7 @@ function DashboardContent() {
   async function handleUnlock() {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/checkout`, {
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });

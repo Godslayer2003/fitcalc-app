@@ -87,6 +87,11 @@ export default function Footer() {
                   Terms
                 </Link>
               </li>
+              <li>
+                <Link href="/delete-account" className="text-zinc-500 transition-colors hover:text-accent dark:text-zinc-400">
+                  Delete account
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

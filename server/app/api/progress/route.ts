@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Accounts aren't configured yet." }, { status: 503 });
   }
 
-  const session = await getSessionUser();
+  const session = getSessionUser(req);
   if (!session) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
 
   const body = await req.json().catch(() => null);

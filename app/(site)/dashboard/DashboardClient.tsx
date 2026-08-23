@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { CUSTOM_CALCULATOR_PRICE_LABEL } from "@/lib/billing";
+import { API_URL } from "@/lib/api";
 import { PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
 import CustomCalculator from "@/components/calculators/CustomCalculator";
@@ -68,7 +69,7 @@ function DashboardAuthGate() {
 }
 
 function DashboardContent() {
-  const { user, logout, refresh } = useAuth();
+  const { user, token, logout, refresh } = useAuth();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -79,9 +80,12 @@ function DashboardContent() {
   useEffect(() => {
     if (!stripeSessionId) return;
     setVerifying(true);
-    fetch("/api/checkout/verify", {
+    fetch(`${API_URL}/api/checkout/verify`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
       body: JSON.stringify({ sessionId: stripeSessionId }),
     })
       .then(() => refresh())
@@ -100,7 +104,10 @@ function DashboardContent() {
   async function handleUnlock() {
     setLoading(true);
     try {
-      const res = await fetch("/api/checkout", { method: "POST" });
+      const res = await fetch(`${API_URL}/api/checkout`, {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;

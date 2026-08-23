@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Bookmark, Check } from "lucide-react";
 import type { ProgressMetric } from "@/lib/progress";
+import { API_URL } from "@/lib/api";
 import { useAuth } from "@/components/AuthProvider";
 
 /**
@@ -17,7 +18,7 @@ export default function SaveProgressButton({
   metric: ProgressMetric;
   value: number | null;
 }) {
-  const { authEnabled, user, refresh } = useAuth();
+  const { authEnabled, user, token, refresh } = useAuth();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -26,9 +27,12 @@ export default function SaveProgressButton({
   async function handleSave() {
     if (saving || value === null) return;
     setSaving(true);
-    await fetch("/api/progress", {
+    await fetch(`${API_URL}/api/progress`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
       body: JSON.stringify({ metric, value }),
     });
     await refresh();

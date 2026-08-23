@@ -4,14 +4,13 @@ import { getSessionUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isAdminEmail } from "@/lib/admin";
 import { CUSTOM_CALCULATOR_PRICE_CENTS, AUTH_ENABLED } from "@/lib/billing";
-import { siteConfig } from "@/lib/site";
 
-export async function POST() {
+export async function POST(req: Request) {
   if (!AUTH_ENABLED) {
     return NextResponse.json({ error: "Accounts aren't configured yet." }, { status: 503 });
   }
 
-  const session = await getSessionUser();
+  const session = getSessionUser(req);
   if (!session) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { id: session.id } });
@@ -22,6 +21,11 @@ export async function POST() {
 
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({ error: "Payments aren't configured yet." }, { status: 500 });
+  }
+
+  const webOrigin = process.env.WEB_ORIGIN;
+  if (!webOrigin) {
+    return NextResponse.json({ error: "WEB_ORIGIN is not configured." }, { status: 500 });
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -40,8 +44,8 @@ export async function POST() {
         quantity: 1,
       },
     ],
-    success_url: `${siteConfig.url}/dashboard?stripe_session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${siteConfig.url}/dashboard`,
+    success_url: `${webOrigin}/dashboard?stripe_session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${webOrigin}/dashboard`,
   });
 
   return NextResponse.json({ url: checkoutSession.url });

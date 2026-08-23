@@ -4,7 +4,7 @@ const MAX_ATTEMPTS = 10;
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
 /**
- * In-memory, per-process limiter — resets on redeploy/restart and doesn't
+ * In-memory, per-process limiter - resets on redeploy/restart and doesn't
  * share state across instances. Acceptable for a single-instance solo
  * project; not a substitute for a real distributed limiter at scale.
  */

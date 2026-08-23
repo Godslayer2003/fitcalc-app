@@ -1,7 +1,8 @@
 services:
   - type: web
-    name: fitcalc-app
+    name: fitcalc-api
     runtime: node
+    rootDir: server
     plan: free
     buildCommand: npm ci && npx prisma generate && npx prisma db push --accept-data-loss && npm run build
     startCommand: npm start -- -p $PORT
@@ -16,5 +17,5 @@ services:
         value: ethan10038@gmail.com
       - key: STRIPE_SECRET_KEY
         sync: false
-      - key: NEXT_PUBLIC_SITE_URL
+      - key: WEB_ORIGIN
         sync: false

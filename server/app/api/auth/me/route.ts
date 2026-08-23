@@ -5,12 +5,12 @@ import { isAdminEmail } from "@/lib/admin";
 import { getProgressLog } from "@/lib/progress";
 import { AUTH_ENABLED } from "@/lib/billing";
 
-export async function GET() {
+export async function GET(req: Request) {
   if (!AUTH_ENABLED) {
     return NextResponse.json({ authEnabled: false, user: null });
   }
 
-  const session = await getSessionUser();
+  const session = getSessionUser(req);
   if (!session) return NextResponse.json({ authEnabled: true, user: null });
 
   const user = await prisma.user.findUnique({ where: { id: session.id } });

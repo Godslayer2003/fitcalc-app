@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/db";
-import { signSessionToken, setSessionCookie } from "@/lib/auth";
+import { signSessionToken } from "@/lib/auth";
 import { AUTH_ENABLED } from "@/lib/billing";
 import { checkRateLimit, requestIp } from "@/lib/rate-limit";
 
@@ -32,9 +32,7 @@ export async function POST(req: Request) {
 
   const passwordHash = await bcrypt.hash(password, 10);
   const user = await prisma.user.create({ data: { email, passwordHash } });
+  const accessToken = signSessionToken({ sub: user.id, email: user.email });
 
-  const token = signSessionToken({ sub: user.id, email: user.email });
-  await setSessionCookie(token);
-
-  return NextResponse.json({ id: user.id, email: user.email });
+  return NextResponse.json({ accessToken, user: { id: user.id, email: user.email } });
 }

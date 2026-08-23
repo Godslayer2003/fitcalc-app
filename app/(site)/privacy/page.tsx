@@ -71,11 +71,14 @@ export default function PrivacyPage() {
             want to save your progress or unlock the custom calculator. If
             you create an account, your email address and a securely hashed
             password (we never store your password in plain text) are
-            stored directly in our own database. If you pay to unlock the
-            custom calculator, our payment processor (Stripe) handles your
-            card details directly — we never see or store your full card
-            number. We only receive confirmation that a payment succeeded,
-            which we use to mark your account as unlocked.
+            stored directly in our own database. When you sign in, your
+            browser keeps you signed in using a security token stored in
+            its local storage — not a cookie — which is removed when you
+            sign out or clear your browser&apos;s site data. If you pay to
+            unlock the custom calculator, our payment processor (Stripe)
+            handles your card details directly — we never see or store your
+            full card number. We only receive confirmation that a payment
+            succeeded, which we use to mark your account as unlocked.
           </p>
         </section>
 

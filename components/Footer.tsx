@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
             <Link href="/" className="flex items-center gap-2 text-base font-bold tracking-tight">
-              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-accent text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-white">
                 <Activity className="h-3.5 w-3.5" strokeWidth={2.5} />
               </span>
               {siteConfig.name}

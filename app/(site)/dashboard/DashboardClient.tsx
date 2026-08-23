@@ -12,7 +12,7 @@ import {
   TrendingUp,
   Sparkles,
 } from "lucide-react";
-import { CUSTOM_CALCULATOR_PRICE_LABEL, AUTH_ENABLED } from "@/lib/billing";
+import { CUSTOM_CALCULATOR_PRICE_LABEL } from "@/lib/billing";
 import { PROGRESS_METRICS, type ProgressMetric } from "@/lib/progress";
 import Sparkline from "@/components/Sparkline";
 import CustomCalculator from "@/components/calculators/CustomCalculator";
@@ -21,7 +21,8 @@ import { useAuth } from "@/components/AuthProvider";
 import { siteConfig } from "@/lib/site";
 
 export default function DashboardClient() {
-  if (!AUTH_ENABLED) {
+  const { authEnabled } = useAuth();
+  if (!authEnabled) {
     return (
       <div className="mx-auto max-w-md px-4 py-14 text-center sm:px-6">
         <Construction className="mx-auto h-8 w-8 text-zinc-400" />

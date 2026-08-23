@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { Activity, LayoutDashboard } from "lucide-react";
 import { siteConfig } from "@/lib/site";
-import { AUTH_ENABLED } from "@/lib/billing";
 import { useAuth } from "@/components/AuthProvider";
 
 export default function Nav() {
+  const { authEnabled } = useAuth();
   return (
     <header className="sticky top-0 z-40 border-b border-black/10 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/70">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
@@ -26,7 +26,7 @@ export default function Nav() {
           <Link href="/about" className="hidden text-zinc-600 transition-colors hover:text-accent sm:inline dark:text-zinc-300">
             About
           </Link>
-          {AUTH_ENABLED && <AuthSection />}
+          {authEnabled && <AuthSection />}
         </nav>
       </div>
     </header>

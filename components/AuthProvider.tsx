@@ -12,6 +12,7 @@ interface SessionUser {
 
 interface AuthContextValue {
   user: SessionUser | null;
+  authEnabled: boolean;
   loading: boolean;
   login: (email: string, password: string) => Promise<string | null>;
   register: (email: string, password: string) => Promise<string | null>;
@@ -34,6 +35,9 @@ async function postJson(url: string, body: unknown): Promise<{ ok: boolean; erro
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<SessionUser | null>(null);
+  // Optimistic default so pages don't flash "not configured" while the
+  // first /api/auth/me call is in flight — the common case is enabled.
+  const [authEnabled, setAuthEnabled] = useState(true);
   const [loading, setLoading] = useState(true);
 
   async function refresh() {
@@ -41,6 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await fetch("/api/auth/me");
       const data = await res.json();
       setUser(data.user ?? null);
+      setAuthEnabled(data.authEnabled !== false);
     } catch {
       setUser(null);
     }
@@ -71,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, refresh }}>
+    <AuthContext.Provider value={{ user, authEnabled, loading, login, register, logout, refresh }}>
       {children}
     </AuthContext.Provider>
   );

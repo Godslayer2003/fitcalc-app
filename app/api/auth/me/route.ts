@@ -7,18 +7,19 @@ import { AUTH_ENABLED } from "@/lib/billing";
 
 export async function GET() {
   if (!AUTH_ENABLED) {
-    return NextResponse.json({ user: null });
+    return NextResponse.json({ authEnabled: false, user: null });
   }
 
   const session = await getSessionUser();
-  if (!session) return NextResponse.json({ user: null });
+  if (!session) return NextResponse.json({ authEnabled: true, user: null });
 
   const user = await prisma.user.findUnique({ where: { id: session.id } });
-  if (!user) return NextResponse.json({ user: null });
+  if (!user) return NextResponse.json({ authEnabled: true, user: null });
 
   const admin = isAdminEmail(user.email);
 
   return NextResponse.json({
+    authEnabled: true,
     user: {
       id: user.id,
       email: user.email,

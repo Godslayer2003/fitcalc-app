@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-// Manifest "any"-purpose icon: the finished circular mark, matching the
+// Manifest "any"-purpose icon: the finished squircle mark, matching the
 // browser favicon - contexts using this icon don't apply their own mask.
 export async function GET() {
   return new ImageResponse(
@@ -9,7 +9,7 @@ export async function GET() {
         style={{
           width: "100%",
           height: "100%",
-          borderRadius: "50%",
+          borderRadius: "22%",
           background: "#059669",
           display: "flex",
           alignItems: "center",

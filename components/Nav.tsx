@@ -11,7 +11,7 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b border-black/10 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/70">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-white">
+          <span className="flex h-7 w-7 items-center justify-center rounded-[22%] bg-accent text-white">
             <Activity className="h-4 w-4" strokeWidth={2.5} />
           </span>
           {siteConfig.name}
